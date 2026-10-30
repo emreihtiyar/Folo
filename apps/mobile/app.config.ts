@@ -57,7 +57,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         LSApplicationQueriesSchemes: ["bilibili", "youtube"],
         CFBundleAllowMixedLocalizations: true,
         // apps/mobile/src/@types/constants.ts currentSupportedLanguages
-        CFBundleLocalizations: ["en", "ja", "zh-CN", "zh-TW"],
+        CFBundleLocalizations: ["en", "ja", "tr", "zh-CN", "zh-TW"],
         CFBundleDevelopmentRegion: "en",
       },
       googleServicesFile: "./build/GoogleService-Info.plist",

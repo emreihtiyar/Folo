@@ -1,9 +1,11 @@
 // DONT EDIT THIS FILE MANUALLY
 import common_en from "@locales/common/en.json"
 import common_ja from "@locales/common/ja.json"
+import common_tr from "@locales/common/tr.json"
 import common_zhCN from "@locales/common/zh-CN.json"
 import common_zhTW from "@locales/common/zh-TW.json"
 import external_en from "@locales/external/en.json"
+import external_tr from "@locales/external/tr.json"
 import external_zhCN from "@locales/external/zh-CN.json"
 
 import type { ns, SSRSupportedLanguages } from "./constants"
@@ -28,6 +30,7 @@ export const defaultResources = {
     common: common_ja,
   },
   "zh-TW": { common: common_zhTW },
+  tr: { common: common_tr, external: external_tr },
 } satisfies Record<
   SSRSupportedLanguages,
   Partial<Record<(typeof ns)[number], Record<string, string>>>

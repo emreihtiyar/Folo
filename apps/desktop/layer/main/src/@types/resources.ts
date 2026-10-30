@@ -1,5 +1,6 @@
 import en from "@locales/native/en.json"
 import ja from "@locales/native/ja.json"
+import tr from "@locales/native/tr.json"
 import zhCn from "@locales/native/zh-CN.json"
 import zhTw from "@locales/native/zh-TW.json"
 
@@ -18,5 +19,8 @@ export const resources = {
   },
   ja: {
     native: ja,
+  },
+  tr: {
+    native: tr,
   },
 } satisfies Record<MainSupportedLanguages, Record<(typeof ns)[number], Record<string, string>>>
