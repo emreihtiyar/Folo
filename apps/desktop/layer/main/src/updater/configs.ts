@@ -15,7 +15,8 @@ export const appUpdaterConfig = {
     // In this case, updates need to be disabled.
     !(isWindows && path.resolve(process.execPath, "../../") !== process.env.LOCALAPPDATA),
   // Disable app update will also disable renderer hot update and core update
-  enableAppUpdate: !DEV,
+  // Personal build: updates come from upstream releases and would replace this build
+  enableAppUpdate: false,
 
   app: {
     autoCheckUpdate: true,
