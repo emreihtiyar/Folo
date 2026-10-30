@@ -1,6 +1,7 @@
 import type { SummarySchema } from "@follow/database/schemas/types"
 import { summaryService } from "@follow/database/services/summary"
 import type { SupportedActionLanguage } from "@follow/shared"
+import { toServerActionLanguage } from "@follow/shared/language"
 import { parseHtml } from "@follow/utils/html"
 
 import { apiClient } from "../../context"
@@ -178,7 +179,7 @@ class SummarySyncService {
       .ai.summary.$get({
         query: {
           id: entryId,
-          language: actionLanguage,
+          language: toServerActionLanguage(actionLanguage),
           target,
         },
       })

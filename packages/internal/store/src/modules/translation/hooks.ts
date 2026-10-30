@@ -1,4 +1,3 @@
-import type { SupportedLanguages } from "@follow/models/types"
 import type { SupportedActionLanguage } from "@follow/shared"
 import { useQueries } from "@tanstack/react-query"
 import { useCallback } from "react"
@@ -54,7 +53,7 @@ export const useEntryTranslation = ({
   setting,
 }: {
   entryId: string
-  language: SupportedLanguages
+  language: SupportedActionLanguage
   setting: boolean
 }) => {
   const actionSetting = useEntry(entryId, (state) => state.settings?.translation)

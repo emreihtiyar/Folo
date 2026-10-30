@@ -5,6 +5,7 @@ import {
   apiClientContext,
   apiContext,
   authClientContext,
+  clientTranslatorContext,
   queryClientContext,
 } from "@follow/store/context"
 import { registerRootComponent } from "expo"
@@ -22,6 +23,7 @@ import { initializeApp } from "./initialize"
 import { followApi } from "./lib/api-client"
 import { apiClient } from "./lib/api-fetch"
 import { authClient } from "./lib/auth"
+import { clientTranslator } from "./lib/client-translator"
 import { initializeI18n } from "./lib/i18n"
 import { TabBarPortal } from "./lib/navigation/bottom-tab/TabBarPortal"
 import { TabRoot } from "./lib/navigation/bottom-tab/TabRoot"
@@ -43,6 +45,7 @@ apiClientContext.provide(apiClient)
 authClientContext.provide(authClient)
 queryClientContext.provide(queryClient)
 apiContext.provide(followApi)
+clientTranslatorContext.provide(clientTranslator)
 
 enableFreeze(true)
 ;[Image, LinearGradient].forEach((Component) => {

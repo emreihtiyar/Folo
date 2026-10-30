@@ -5,6 +5,8 @@ export interface GeneralSettings {
   translationMode: "bilingual" | "translation-only"
   summary: boolean
   actionLanguage: string
+  // Used for AI output languages the Folo server doesn't support, kept on device only
+  deeplApiKey: string
   startupScreen: "subscription" | "timeline"
   sendAnonymousData: boolean
   unreadOnly: boolean

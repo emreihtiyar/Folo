@@ -250,6 +250,8 @@
   "general.content": "内容",
   "general.data": "数据",
   "general.data_file.label": "数据文件",
+  "general.deepl_api_key.description": "Folo AI 不支持该语言，因此翻译将通过 DeepL 完成。可在 deepl.com/pro-api 免费获取密钥。密钥仅保存在本设备上。AI 摘要将以英文生成。",
+  "general.deepl_api_key.label": "DeepL API 密钥",
   "general.dim_read.description": "淡化时间线中已读条目的显示颜色。",
   "general.dim_read.label": "淡化已读条目",
   "general.enhanced.description": "启用增强设置可提供更多自定义选项，但也可能引发不可预见的问题。",

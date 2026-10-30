@@ -3,6 +3,7 @@ import { ResponsiveSelect } from "@follow/components/ui/select/responsive.js"
 import { useTypeScriptHappyCallback } from "@follow/hooks"
 import { ACTION_LANGUAGE_MAP } from "@follow/shared"
 import { IN_ELECTRON } from "@follow/shared/constants"
+import { isClientTranslationLanguage } from "@follow/shared/language"
 import { cn } from "@follow/utils/utils"
 import { useQuery } from "@tanstack/react-query"
 import dayjs from "dayjs"
@@ -17,6 +18,7 @@ import { langLoadingLockMapAtom } from "~/atoms/lang"
 import {
   DEFAULT_ACTION_LANGUAGE,
   setGeneralSetting,
+  useActionLanguage,
   useGeneralSettingKey,
   useGeneralSettingSelector,
   useGeneralSettingValue,
@@ -105,6 +107,7 @@ export const SettingGeneral = () => {
           }),
           TranslationModeSelector,
           ActionLanguageSelector,
+          DeepLApiKeySetting,
 
           {
             type: "title",
@@ -358,6 +361,30 @@ const ActionLanguageSelector = () => {
         ]}
       />
     </div>
+  )
+}
+
+const DeepLApiKeySetting = () => {
+  const { t } = useTranslation("settings")
+  const actionLanguage = useActionLanguage()
+  const deeplApiKey = useGeneralSettingKey("deeplApiKey")
+
+  if (!isClientTranslationLanguage(actionLanguage)) return null
+
+  return (
+    <SettingItemGroup>
+      <SettingInput
+        type="password"
+        label={t("general.deepl_api_key.label")}
+        labelClassName="w-[150px]"
+        value={deeplApiKey}
+        onChange={(event) => {
+          setGeneralSetting("deeplApiKey", event.target.value.trim())
+          setTranslationCache({})
+        }}
+      />
+      <SettingDescription>{t("general.deepl_api_key.description")}</SettingDescription>
+    </SettingItemGroup>
   )
 }
 

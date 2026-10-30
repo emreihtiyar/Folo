@@ -250,6 +250,8 @@
   "general.content": "コンテンツ",
   "general.data": "データ",
   "general.data_file.label": "データファイル",
+  "general.deepl_api_key.description": "この言語は Folo AI でサポートされていないため、翻訳は DeepL で行われます。キーは deepl.com/pro-api で無料で取得できます。キーはこのデバイスにのみ保存されます。AI 要約は英語で生成されます。",
+  "general.deepl_api_key.label": "DeepL API キー",
   "general.dim_read.description": "タイムラインで既読のエントリの色を薄くします。",
   "general.dim_read.label": "既読アイテムをフェード",
   "general.enhanced.description": "強化された設定を有効にすると、より多くのカスタマイズオプションが提供されますが、予期しない問題が発生する可能性もあります。",

@@ -34,6 +34,7 @@ export const generalServerSyncWhiteListKeys: (keyof GeneralSettings)[] = [
   "language",
   "appLaunchOnStartup",
   "voice",
+  "deeplApiKey",
 ]
 
 export function useActionLanguage() {

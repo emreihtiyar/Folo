@@ -1,6 +1,7 @@
 import type { AuthClient } from "@follow/shared/auth"
 import type { QueryClient } from "@tanstack/react-query"
 
+import type { ClientTranslator } from "./modules/translation/client-translator"
 import type { APIClient, FollowAPI } from "./types"
 
 const NO_VALUE_DEFAULT = Symbol("NO_VALUE_DEFAULT")
@@ -30,7 +31,9 @@ export const apiClientContext = createJSContext<APIClient>()
 export const apiContext = createJSContext<FollowAPI>()
 export const authClientContext = createJSContext<AuthClient>()
 export const queryClientContext = createJSContext<QueryClient>()
+export const clientTranslatorContext = createJSContext<ClientTranslator>()
 export const apiClient = apiClientContext.consumer
 export const api = apiContext.consumer
 export const authClient = authClientContext.consumer
 export const queryClient = queryClientContext.consumer
+export const clientTranslator = clientTranslatorContext.consumer

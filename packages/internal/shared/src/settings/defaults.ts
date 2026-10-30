@@ -8,6 +8,7 @@ export const defaultGeneralSettings: GeneralSettings = {
   translationMode: "bilingual",
   summary: true,
   actionLanguage: "default",
+  deeplApiKey: "",
 
   // mobile app
   startupScreen: "timeline",

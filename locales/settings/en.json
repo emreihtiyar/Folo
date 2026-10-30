@@ -250,6 +250,8 @@
   "general.content": "Content",
   "general.data": "Data",
   "general.data_file.label": "Data File",
+  "general.deepl_api_key.description": "This language isn't supported by Folo AI, so translations are done with DeepL. Get a free key at deepl.com/pro-api. The key stays on this device. AI summaries are generated in English.",
+  "general.deepl_api_key.label": "DeepL API Key",
   "general.dim_read.description": "Dim the color of entries in the timeline that have been read.",
   "general.dim_read.label": "Fade Read Items",
   "general.enhanced.description": "Enabling the enhanced settings offers more customization options, but may also introduce unforeseen issues. !!! Keep this as the gateway to truly experimental/complex things if needed later, otherwise it might be removable if other settings cover specifics.",

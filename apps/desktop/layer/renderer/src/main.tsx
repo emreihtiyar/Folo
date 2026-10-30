@@ -7,6 +7,7 @@ import {
   apiClientContext,
   apiContext,
   authClientContext,
+  clientTranslatorContext,
   queryClientContext,
 } from "@follow/store/context"
 import { getOS } from "@follow/utils/utils"
@@ -17,6 +18,7 @@ import { RouterProvider } from "react-router/dom"
 
 import { apiClient } from "~/lib/api-fetch"
 import { authClient } from "~/lib/auth"
+import { clientTranslator } from "~/lib/client-translator"
 
 import { setAppIsReady } from "./atoms/app"
 import { ElECTRON_CUSTOM_TITLEBAR_HEIGHT } from "./constants"
@@ -30,6 +32,7 @@ apiClientContext.provide(apiClient)
 authClientContext.provide(authClient)
 queryClientContext.provide(queryClient)
 apiContext.provide(followApi)
+clientTranslatorContext.provide(clientTranslator)
 
 initializeApp().finally(() => {
   import("./push-notification").then(({ registerWebPushNotifications }) => {

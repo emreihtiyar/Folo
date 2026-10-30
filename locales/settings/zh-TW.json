@@ -221,6 +221,8 @@
   "general.content": "內容",
   "general.data": "資料",
   "general.data_file.label": "資料檔案",
+  "general.deepl_api_key.description": "Folo AI 不支援此語言，因此翻譯將透過 DeepL 完成。可在 deepl.com/pro-api 免費取得金鑰。金鑰僅儲存在此裝置上。AI 摘要將以英文產生。",
+  "general.deepl_api_key.label": "DeepL API 金鑰",
   "general.enhanced.description": "啟用增強設定可提供更多自訂選項，但也可能引入不可預見的問題。",
   "general.enhanced.disabled.tip": "增強設定已停用，您可以在「一般設定 - 進階」中啟用。",
   "general.enhanced.enabled.tip": "增強設定已啟用，您可以在「一般設定 - 進階」中停用。",

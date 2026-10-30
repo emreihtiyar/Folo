@@ -250,6 +250,8 @@
   "general.content": "İçerik",
   "general.data": "Veri",
   "general.data_file.label": "Veri Dosyası",
+  "general.deepl_api_key.description": "Bu dil Folo AI tarafından desteklenmediği için çeviriler DeepL ile yapılır. Ücretsiz anahtarı deepl.com/pro-api adresinden alabilirsiniz. Anahtar yalnızca bu cihazda saklanır. AI özetleri İngilizce oluşturulur.",
+  "general.deepl_api_key.label": "DeepL API Anahtarı",
   "general.dim_read.description": "Zaman akışında okunmuş gönderilerin rengini soluklaştır.",
   "general.dim_read.label": "Okunmuşları Soluklaştır",
   "general.enhanced.description": "Gelişmiş ayarları etkinleştirmek daha fazla özelleştirme seçeneği sunar, ancak beklenmedik sorunlara da yol açabilir.",

@@ -200,4 +200,5 @@ export const generalServerSyncWhiteListKeys: (keyof GeneralSettings)[] = [
   "sendAnonymousData",
   "language",
   "voice",
+  "deeplApiKey",
 ]

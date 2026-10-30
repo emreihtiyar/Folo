@@ -1,12 +1,14 @@
 import type { TranslationSchema } from "@follow/database/schemas/types"
 import { TranslationService } from "@follow/database/services/translation"
 import type { SupportedActionLanguage } from "@follow/shared"
+import type { ClientTranslationLanguage } from "@follow/shared/language"
+import { isClientTranslationLanguage } from "@follow/shared/language"
 
-import { apiClient } from "../../context"
+import { apiClient, clientTranslator } from "../../context"
 import type { Hydratable, Resetable } from "../../lib/base"
 import { createImmerSetter, createTransaction, createZustandStore } from "../../lib/helper"
 import { getEntry } from "../entry/getter"
-import type { EntryTranslation, TranslationFieldArray } from "./types"
+import type { EntryTranslation, TranslationField, TranslationFieldArray } from "./types"
 import { translationFields } from "./types"
 
 type TranslationModel = Omit<TranslationSchema, "createdAt">
@@ -116,11 +118,18 @@ class TranslationSyncService {
 
     if (fields.length === 0) return null
 
-    const res = await apiClient().ai.translation.$get({
-      query: { id: entryId, language, fields: fields.join(",") },
-    })
+    const data = isClientTranslationLanguage(language)
+      ? await this.translateOnClient(
+          fields.map((field) => [field, entry[field]!]),
+          language,
+        )
+      : (
+          await apiClient().ai.translation.$get({
+            query: { id: entryId, language, fields: fields.join(",") },
+          })
+        ).data
 
-    if (!res.data) return null
+    if (!data) return null
 
     const translation: TranslationModel = {
       entryId,
@@ -131,11 +140,41 @@ class TranslationSyncService {
       readabilityContent: null,
     }
     fields.forEach((field) => {
-      translation[field] = res.data?.[field] ?? ""
+      translation[field] = data[field] ?? ""
     })
 
     await translationActions.upsertMany([translation])
     return translation
+  }
+
+  // Returns the same shape as the server translation so the UI renders it identically
+  private async translateOnClient(
+    fieldContents: [TranslationField, string][],
+    language: ClientTranslationLanguage,
+  ) {
+    const translate = clientTranslator()
+    const isHTMLField = (field: TranslationField) =>
+      field === "content" || field === "readabilityContent"
+
+    const data: Partial<Record<TranslationField, string>> = {}
+    const results = await Promise.all(
+      [false, true].map(async (html) => {
+        const group = fieldContents.filter(([field]) => isHTMLField(field) === html)
+        if (group.length === 0) return true
+
+        const texts = await translate({
+          texts: group.map(([, content]) => content),
+          language,
+          html,
+        })
+        if (!texts) return false
+        group.forEach(([field], index) => {
+          data[field] = texts[index]
+        })
+        return true
+      }),
+    )
+    return results.every(Boolean) ? data : null
   }
 }
 
