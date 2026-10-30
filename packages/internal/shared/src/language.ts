@@ -33,3 +33,9 @@ export const ACTION_LANGUAGE_MAP: Record<
   },
 }
 export const ACTION_LANGUAGE_KEYS = Object.keys(ACTION_LANGUAGE_MAP) as SupportedActionLanguage[]
+
+// AI actions only accept the languages above, so UI languages without AI support fall back to English
+export const toSupportedActionLanguage = (language: string): SupportedActionLanguage =>
+  ACTION_LANGUAGE_KEYS.includes(language as SupportedActionLanguage)
+    ? (language as SupportedActionLanguage)
+    : "en"

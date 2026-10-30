@@ -1,10 +1,10 @@
+import { toSupportedActionLanguage } from "@follow/shared/language"
 import { defaultGeneralSettings } from "@follow/shared/settings/defaults"
 import type { GeneralSettings } from "@follow/shared/settings/interface"
 import type { FetchEntriesPropsSettings } from "@follow/store/entry/types"
 import { useMemo } from "react"
 
 import { getDeviceLanguage } from "@/src/lib/i18n"
-import type { SupportedLanguages } from "@/src/lib/language"
 
 import { createSettingAtom } from "./internal/helper"
 
@@ -39,12 +39,12 @@ export const generalServerSyncWhiteListKeys: (keyof GeneralSettings)[] = [
 export function useActionLanguage() {
   const actionLanguage = useGeneralSettingSelector((s) => s.actionLanguage)
   const language = useGeneralSettingSelector((s) => s.language)
-  return (actionLanguage === "default" ? language : actionLanguage) as SupportedLanguages
+  return toSupportedActionLanguage(actionLanguage === "default" ? language : actionLanguage)
 }
 
 export function getActionLanguage() {
   const { actionLanguage, language } = getGeneralSettings()
-  return (actionLanguage === "default" ? language : actionLanguage) as SupportedLanguages
+  return toSupportedActionLanguage(actionLanguage === "default" ? language : actionLanguage)
 }
 
 export function useHideAllReadSubscriptions() {

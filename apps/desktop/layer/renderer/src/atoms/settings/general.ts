@@ -1,5 +1,5 @@
 import { createSettingAtom } from "@follow/atoms/helper/setting.js"
-import type { SupportedLanguages } from "@follow/models"
+import { toSupportedActionLanguage } from "@follow/shared/language"
 import { defaultGeneralSettings } from "@follow/shared/settings/defaults"
 import { enhancedGeneralSettingKeys } from "@follow/shared/settings/enhanced"
 import type { GeneralSettings } from "@follow/shared/settings/interface"
@@ -177,16 +177,16 @@ export function hookEnhancedSettings<
 export function useActionLanguage() {
   const actionLanguage = useGeneralSettingSelectorInternal((s) => s.actionLanguage)
   const language = useGeneralSettingSelectorInternal((s) => s.language)
-  return (
-    actionLanguage === DEFAULT_ACTION_LANGUAGE ? language : actionLanguage
-  ) as SupportedLanguages
+  return toSupportedActionLanguage(
+    actionLanguage === DEFAULT_ACTION_LANGUAGE ? language : actionLanguage,
+  )
 }
 
 export function getActionLanguage() {
   const { actionLanguage, language } = getGeneralSettingsInternal()
-  return (
-    actionLanguage === DEFAULT_ACTION_LANGUAGE ? language : actionLanguage
-  ) as SupportedLanguages
+  return toSupportedActionLanguage(
+    actionLanguage === DEFAULT_ACTION_LANGUAGE ? language : actionLanguage,
+  )
 }
 
 export function useHideAllReadSubscriptions() {
