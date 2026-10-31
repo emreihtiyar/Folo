@@ -1,12 +1,11 @@
 import { getMousePosition } from "@follow/components/hooks/useMouse.js"
-import { FeedViewType, UserRole } from "@follow/constants"
+import { FeedViewType } from "@follow/constants"
 import { IN_ELECTRON } from "@follow/shared/constants"
 import { isEntryStarred } from "@follow/store/collection/getter"
 import { collectionSyncService } from "@follow/store/collection/store"
 import { getEntry } from "@follow/store/entry/getter"
 import { entrySyncServices } from "@follow/store/entry/store"
 import { unreadSyncService } from "@follow/store/unread/store"
-import { useUserRole } from "@follow/store/user/hooks"
 import { cn, resolveUrlWithBase } from "@follow/utils/utils"
 import { useMutation } from "@tanstack/react-query"
 import { useTranslation } from "react-i18next"
@@ -30,7 +29,6 @@ import { getRouteParams } from "~/hooks/biz/useRouteParams"
 import { ipcServices } from "~/lib/client"
 import { copyToClipboard } from "~/lib/clipboard"
 import { parseHtml } from "~/lib/parse-html"
-import { useActivationModal } from "~/modules/activation"
 import { markAllByRoute } from "~/modules/entry-column/hooks/useMarkAll"
 import { useGalleryModal } from "~/modules/entry-content/hooks"
 import { useTipModal } from "~/modules/wallet/hooks"
@@ -113,9 +111,6 @@ export const useRegisterEntryCommands = () => {
   const openGalleryModal = useGalleryModal()
   const read = useRead()
   const unread = useUnread()
-
-  const role = useUserRole()
-  const presentActivationModal = useActivationModal()
 
   const voice = useGeneralSettingKey("voice")
 
@@ -423,10 +418,6 @@ export const useRegisterEntryCommands = () => {
         icon: <i className="i-mgc-ai-cute-re" />,
         category,
         run: () => {
-          if (role === UserRole.Free || role === UserRole.Trial) {
-            presentActivationModal()
-            return
-          }
           toggleShowAISummaryOnce()
         },
       },
@@ -436,16 +427,12 @@ export const useRegisterEntryCommands = () => {
         icon: <i className="i-mgc-translate-2-ai-cute-re" />,
         category,
         run: () => {
-          if (role === UserRole.Free || role === UserRole.Trial) {
-            presentActivationModal()
-            return
-          }
           toggleShowAITranslationOnce()
         },
       },
     ],
     {
-      deps: [role],
+      deps: [],
     },
   )
 }
