@@ -1,4 +1,5 @@
 import { ACTION_LANGUAGE_KEYS } from "@follow/shared"
+import { isClientTranslationLanguage } from "@follow/shared/language"
 import i18next from "i18next"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
@@ -7,12 +8,17 @@ import { View } from "react-native"
 import type { MobileSupportedLanguages } from "@/src/@types/constants"
 import { currentSupportedLanguages } from "@/src/@types/constants"
 import { defaultResources } from "@/src/@types/default-resource"
-import { setGeneralSetting, useGeneralSettingKey } from "@/src/atoms/settings/general"
+import {
+  setGeneralSetting,
+  useActionLanguage,
+  useGeneralSettingKey,
+} from "@/src/atoms/settings/general"
 import {
   NavigationBlurEffectHeaderView,
   SafeNavigationScrollView,
 } from "@/src/components/layouts/views/SafeNavigationScrollView"
 import { Select } from "@/src/components/ui/form/Select"
+import { PlainTextField } from "@/src/components/ui/form/TextField"
 import {
   GroupedInsetListCard,
   GroupedInsetListCell,
@@ -81,6 +87,36 @@ function LanguageSetting({ settingKey }: { settingKey: "language" | "actionLangu
     >
       <View className="w-[100px]">
         <LanguageSelect settingKey={settingKey} />
+      </View>
+    </GroupedInsetListCell>
+  )
+}
+
+function DeepLApiKeySetting() {
+  const { t } = useTranslation("settings")
+  const actionLanguage = useActionLanguage()
+  const deeplApiKey = useGeneralSettingKey("deeplApiKey")
+
+  if (!isClientTranslationLanguage(actionLanguage)) return null
+
+  return (
+    <GroupedInsetListCell
+      label={t("general.deepl_api_key.label")}
+      description={t("general.deepl_api_key.description")}
+    >
+      <View className="w-[140px]">
+        <PlainTextField
+          className="w-full text-right"
+          hitSlop={10}
+          secureTextEntry
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholder="xxxx:fx"
+          value={deeplApiKey}
+          onChangeText={(value) => {
+            setGeneralSetting("deeplApiKey", value.trim())
+          }}
+        />
       </View>
     </GroupedInsetListCell>
   )
@@ -169,6 +205,7 @@ export const GeneralScreen: NavigationControllerView = () => {
         </GroupedInsetListCell>
         <TranslationModeSetting />
         <LanguageSetting settingKey="actionLanguage" />
+        <DeepLApiKeySetting />
       </GroupedInsetListCard>
 
       {/* Subscriptions */}
